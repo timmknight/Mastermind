@@ -1,14 +1,10 @@
 module Mastermind
 	class Board
-		attr_reader :grid, :code, :turn#, :guess#, :current_row
+		attr_reader :grid, :code, :turn
 
 		def initialize(input = {})
 			@grid = input.fetch(:grid, make_grid)
-			# @current_turn = 0
-			# @current_row = @current_turn
-			# @current_row_code = grid[@current_row]
 			@code = computers_code
-			# @guess = get_guess
 			@turn = 0
 		end
 
@@ -16,50 +12,35 @@ module Mastermind
 			return @turn
 		end
 
-		# def set_code(current_row, value)
-		# 	grid[current_row] = value
-		# end
-
 		def add_guess_to_board(turn, value)
 			grid[turn] = value
 			increment_turn
 		end
 		
 		def increment_turn
-			# puts "increment = #{@turn}"
 			return @turn += 1
 		end
 
-		def show_board
-			print "#{grid[get_turn-1][0]} | #{grid[get_turn-1][1]} | #{grid[get_turn-1][2]} | #{grid[get_turn-1][3]}" 
-			print ""
-			return grid
-			# puts "show_board"
+		def show_board(ary)
+			print "\n#{ary[0]} | #{ary[1]} | #{ary[2]} | #{ary[3]} \n"
 		end
 
+		def showcolor 
+			# print ary[0]
+		end
 		def game_over?
-			# puts ""
-			# puts code
-			# puts get_guess(1234)
 			return true if code_guessed_correctly?
-			# print correct_postion
 			return true if code_not_guessed
-
-			# return true if code_not_guessed
-
-			# return false if !code_guessed_correctly?
 			false
 		end
 
 
 		def correct_postion(guess)
-			str = guess.to_s
-			guessarr = str.split('')
+			guessarr = guess.to_s.split('')
 			count = 0
 			res = []
 			ary = []
 			4.times do |n|
-				# puts "n = #{n}"
 					res << code[n]
 				if code[n] == guessarr[n]
 					count += 1
@@ -95,7 +76,6 @@ module Mastermind
 			colours = ["R", "B", "G", "Y", "S", "P", "W", "C"]
 			4.times do 
 				num = rand(1..8)
-				#puts num
 				arr << colours[num-1]
 			end
 			code = arr.join('')
@@ -105,7 +85,7 @@ module Mastermind
 
 		def code_not_guessed
 			if(get_turn == 12 )
-				puts "computer wins!"
+				puts "Computer Wins! You didn't guess the code."
 				return true
 			end
 			false
@@ -113,7 +93,7 @@ module Mastermind
 
 		def code_guessed_correctly?
 			if code == grid[get_turn-1]
-				puts "winner!"
+				puts "You won!!"
 				return true
 			end
 			false
