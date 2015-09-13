@@ -1,4 +1,4 @@
 # /example/example_game.rb
 require_relative "../lib/mastermind.rb"
-
-Mastermind::Game.new({name: "bob"}).play
+puts "To start a game of Mastermind please enter your name:"
+Mastermind::Game.new({name: gets.chomp}).play

@@ -80,7 +80,7 @@ module Mastermind
 					boardarr = create_color_block(guess)		
 					board.show_board(boardarr)
 					board.add_guess_to_board(board.get_turn, guess)
-					puts "\nCorrect position and color #{board.correct_postion(guess)}\n"
+					puts "\nCorrect position and color #{board.correct_color(guess)}\n"
 				end
 			end
 		end

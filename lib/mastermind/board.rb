@@ -25,17 +25,13 @@ module Mastermind
 			print "\n#{ary[0]} | #{ary[1]} | #{ary[2]} | #{ary[3]} \n"
 		end
 
-		def showcolor 
-			# print ary[0]
-		end
 		def game_over?
 			return true if code_guessed_correctly?
-			return true if code_not_guessed
+			return true if code_not_guessed?
 			false
 		end
 
-
-		def correct_postion(guess)
+		def correct_color(guess)
 			guessarr = guess.to_s.split('')
 			count = 0
 			res = []
@@ -83,7 +79,7 @@ module Mastermind
 			return code
 		end
 
-		def code_not_guessed
+		def code_not_guessed?
 			if(get_turn == 12 )
 				puts "Computer Wins! You didn't guess the code."
 				return true
